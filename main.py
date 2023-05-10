@@ -3,9 +3,13 @@ from imutils import face_utils
 import imutils
 import dlib
 import cv2
-from db.db import insert_trip_details
+from db.db import insert_trip_details, create_trip
 from utils.convertToBlob import convertToBlob
-name = 'bala'
+import threading
+name = input("Enter driver's name : ")
+tripId = create_trip(name)
+print("Trip started for", name)
+print("Trip Id", tripId)
 
 
 def eye_aspect_ratio(eye):
@@ -25,7 +29,7 @@ predict = dlib.shape_predictor("models/dataset.dat")
 (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"]
 cap = cv2.VideoCapture(0)
 flag = 0
-while True:
+while 1:
     ret, frame = cap.read()
     frame = imutils.resize(frame, width=900)
 
@@ -43,13 +47,18 @@ while True:
         rightEyeHull = cv2.convexHull(rightEye)
         cv2.drawContours(frame, [leftEyeHull], -1, (0, 255, 0), 1)
         cv2.drawContours(frame, [rightEyeHull], -1, (0, 255, 0), 1)
+
         if ear < thresh:
             flag += 1
+            blob = convertToBlob(frame)
+            # insert_trip_details(tripId, name, blob, flag)
+            # threading.Thread(target=convertToBlob, args=(frame)).start()
+            threading.Thread(target=insert_trip_details,
+                             args=(tripId, name, blob, flag)).start()
+
             print(flag)
             if flag >= frame_check:
 
-                blob = convertToBlob(frame)
-                insert_trip_details(name, blob)
                 cv2.putText(frame, "****************ALERT!****************", (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
                 cv2.putText(frame, "****************ALERT!****************", (10, 325),
