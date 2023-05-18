@@ -1,0 +1,3 @@
+export const supabaseUrl = "https://akeigbrucshrixrmecks.supabase.co";
+export const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFrZWlnYnJ1Y3Nocml4cm1lY2tzIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM1NTU2NDksImV4cCI6MTk5OTEzMTY0OX0.1lG6w36s40K1FrNGIsixcUOQfwVMY-o_eXpdTcexHwc";
