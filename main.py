@@ -51,8 +51,13 @@ flag = 0
 while 1:
     ret, frame = cap.read()
     frame = imutils.resize(frame, width=900)
+    # Increase brightness
+    brightness_factor = 1.5  # Adjust the factor as needed
+    brightened_frame = cv2.convertScaleAbs(frame, alpha=brightness_factor)
 
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # Detect faces on the brightened frame
+    gray = cv2.cvtColor(brightened_frame, cv2.COLOR_BGR2GRAY)
+    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     subjects = detect(gray, 0)
     for subject in subjects:
         shape = predict(gray, subject)
