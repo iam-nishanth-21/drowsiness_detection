@@ -6,10 +6,29 @@ import cv2
 from db.db import insert_trip_details, create_trip
 from utils.convertToBlob import convertToBlob
 import threading
+import time
 name = input("Enter driver's name : ")
 tripId = create_trip(name)
 print("Trip started for", name)
 print("Trip Id", tripId)
+
+
+last_updated_time = 0  # Variable to store the last updated time
+
+
+def updateTripsInDB(flag, blob):
+    global last_updated_time
+
+    current_time = time.time()  # Get the current timestamp
+    elapsed_time = current_time - last_updated_time  # Calculate the elapsed time
+
+    if elapsed_time < 5:
+        return  # Return if the elapsed time is less than 5 seconds
+
+    threading.Thread(target=insert_trip_details,
+                     args=(tripId, name, blob, flag)).start()
+
+    last_updated_time = time.time()  # Update the last updated time
 
 
 def eye_aspect_ratio(eye):
@@ -53,9 +72,7 @@ while 1:
             blob = convertToBlob(frame)
             # insert_trip_details(tripId, name, blob, flag)
             # threading.Thread(target=convertToBlob, args=(frame)).start()
-            threading.Thread(target=insert_trip_details,
-                             args=(tripId, name, blob, flag)).start()
-
+            updateTripsInDB(flag, blob)
             print(flag)
             if flag >= frame_check:
 
