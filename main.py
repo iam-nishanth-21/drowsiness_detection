@@ -19,8 +19,8 @@ last_updated_time = 0  # Variable to store the last updated time
 def updateTripsInDB(flag, blob):
     global last_updated_time
 
-    current_time = time.time()  # Get the current timestamp
-    elapsed_time = current_time - last_updated_time  # Calculate the elapsed time
+    current_time = time.time()
+    elapsed_time = current_time - last_updated_time
 
     if elapsed_time < 5:
         return  # Return if the elapsed time is less than 5 seconds
