@@ -10,6 +10,7 @@ import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import { TripListView } from "./components/TripListView/TripView";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { TripDetailView } from "./components/TripDetailView/TripDetailView";
+import Analytics from "./pages/Analytics/Analytics";
 
 function App() {
   // const isUserLoggediIn = isLoggedIn ? <Home /> : <Authentication />;
@@ -36,6 +37,11 @@ function App() {
         <Route
           path={routeNamePath[routeNames.TRIPDATA]}
           element={<TripDetailView />}
+        />
+
+        <Route
+          path={routeNamePath[routeNames.ANALYTICS]}
+          element={<Analytics />}
         />
 
         <Route path={routeNamePath[routeNames.PROFILE]} element={<Profile />} />
