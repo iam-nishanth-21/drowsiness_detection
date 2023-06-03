@@ -5,6 +5,7 @@ import { Button, Card, Image, List, Tag } from "antd";
 import { createClient } from "@supabase/supabase-js";
 import { supabaseKey, supabaseUrl } from "../../env";
 import { convertToDayJS } from "../../utils/dateUtils";
+import { TripPlotGraph } from "../Graphs/TripPlotGraph";
 const emptyData: ITripDetails = {
   id: 0,
   inserted_at: "",
@@ -94,6 +95,11 @@ export const TripDetailView = () => {
           <div className="text-slate-400"></div>
         </>
       )}
+
+      <div className="p-4 ">
+        <h1>Individual sleepyness tracking</h1>
+        <TripPlotGraph data={tripDetails} />
+      </div>
       <List
         loading={tripLoader}
         itemLayout="horizontal"

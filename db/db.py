@@ -32,6 +32,16 @@ def insert_trip_details(tripId, name, image, flag):
 
 def create_trip(name):
 
+    response = supabase.from_("Blocked_users").select("*").execute()
+    print(response)
+    if len(response.data):
+        data = response.data
+        names = [item["name"].lower() for item in data]
+        print(names, "Blocked users : ")
+        if name.lower() in names:
+            raise Exception("User is blocked! Can't proceed")
+
+        # Handle the error appropriately
     res = supabase.table('trips').insert({
         'name': name
     }).execute()

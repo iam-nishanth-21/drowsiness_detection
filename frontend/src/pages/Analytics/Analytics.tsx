@@ -6,6 +6,7 @@ import TripGraph from "../../components/Graphs/TripGraph";
 
 import { Chart, registerables } from "chart.js";
 import BarChartComponent from "../../components/Graphs/TripDetailGraph";
+import { TripPlotGraph } from "../../components/Graphs/TripPlotGraph";
 Chart.register(...registerables);
 const supabase = createClient(supabaseUrl, supabaseKey);
 
