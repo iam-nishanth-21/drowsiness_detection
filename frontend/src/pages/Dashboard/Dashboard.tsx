@@ -52,10 +52,8 @@ export const Dashboard = () => {
   const setTotalTripsData = async () => {
     try {
       setTripLoader(true);
-      const tripsData: any = await supabase
-        .from("trip_data")
-        .select(`*`)
-        .limit(5);
+      const tripsData: any = await supabase.from("trip_data").select(`*`);
+      // .limit(5);
 
       console.log("trip data", tripsData);
       if (tripsData && tripsData.data) {
@@ -88,7 +86,8 @@ export const Dashboard = () => {
   };
 
   const setTripsData = async () => {
-    const tripsData: any = await supabase.from("trips").select(`*`).limit(5);
+    const tripsData: any = await supabase.from("trips").select(`*`);
+    // .limit(5);
     console.log(tripsData.data);
     setTrips(tripsData.data.reverse());
   };
