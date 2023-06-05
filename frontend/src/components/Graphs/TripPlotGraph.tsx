@@ -1,16 +1,17 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-
 export const TripPlotGraph = ({ data }) => {
-  // Transform the data array to extract x and y values
   const transformedData = data.map((item) => {
     return {
-      x: item.data.threshold,
       y: item.data.threshold,
+      x: new Date(item.data.currentTime).getTime(),
     };
   });
-  console.log(data, "---------");
+
+  const labels = data.map((item) => item.data.currentTime);
+
   const chartData = {
+    labels: labels,
     datasets: [
       {
         label: "Driver wide view",
@@ -27,9 +28,11 @@ export const TripPlotGraph = ({ data }) => {
       x: {
         type: "linear",
         position: "bottom",
+        // suggestedMin: 1000,
       },
       y: {
         beginAtZero: true,
+        // suggestedMin: 1000,
       },
     },
   };

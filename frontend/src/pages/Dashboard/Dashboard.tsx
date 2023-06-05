@@ -113,6 +113,19 @@ export const Dashboard = () => {
       message.error("Error blocking user");
     }
   };
+
+  const UnBlockuser = async (name: any) => {
+    try {
+      const { data, error } = await supabase
+        .from("Blocked_users")
+        .delete()
+        .eq("name", name);
+
+      console.log(data);
+    } catch (error) {
+      message.error("Error blocking user");
+    }
+  };
   return (
     <div className="p-6">
       <Spin spinning={tripLoader}>
@@ -168,16 +181,22 @@ export const Dashboard = () => {
                       <Button
                         type="primary"
                         onClick={() => {
-                          // blockuser(t.name);
+                          UnBlockuser(t.name);
                         }}
+                        color="red"
                       >
-                        Already Blocked
+                        Unblock
                       </Button>
                     ) : (
                       <Button
                         type="primary"
                         onClick={() => {
                           blockuser(t.name);
+                        }}
+                        style={{
+                          background: "red",
+                          borderColor: "red",
+                          color: "#fff",
                         }}
                       >
                         Block user

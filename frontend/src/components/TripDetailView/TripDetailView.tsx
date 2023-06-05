@@ -96,8 +96,8 @@ export const TripDetailView = () => {
         </>
       )}
 
-      <div className="p-4 ">
-        <h1>Individual sleepyness tracking</h1>
+      <div className="p-4 h-[400px] flex items-center flex-col">
+        <h1 className="flex">Individual sleepyness tracking</h1>
         <TripPlotGraph data={tripDetails} />
       </div>
       <List
